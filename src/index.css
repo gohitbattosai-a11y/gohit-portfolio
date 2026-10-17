@@ -89,6 +89,17 @@ body {
 @keyframes discord-glow { 0%, 100% { box-shadow: 0 0 30px -6px var(--primary), 0 0 70px -20px var(--secondary); } 50% { box-shadow: 0 0 46px -4px var(--primary), 0 0 110px -20px var(--secondary); } }
 .discord-glow { animation: discord-glow 3.2s ease-in-out infinite; }
 
+@keyframes caret-blink { 50% { opacity: 0; } }
+.caret {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.1em;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    background: var(--primary);
+    animation: caret-blink 1s steps(1) infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-    .marquee-track, .pulse-dot, .discord-glow { animation: none; }
+    .marquee-track, .pulse-dot, .discord-glow, .caret { animation: none; }
 }
