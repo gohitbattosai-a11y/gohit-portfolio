@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <!-- Gradiente che sfuma dal ciano al viola -->
+    <linearGradient id="tech-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sfondo scuro con angoli arrotondati -->
+  <rect width="512" height="512" rx="110" fill="#080C14" />
+  
+  <!-- Bordo esagonale geometrico -->
+  <polygon points="256,65 418,158 418,354 256,447 94,354 94,158" fill="none" stroke="url(#tech-grad)" stroke-width="30" stroke-linejoin="round" />
+           
+  <!-- Lettera centrale (puoi cambiarla con la tua iniziale) -->
+  <text x="46%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="url(#tech-grad)" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="200" letter-spacing="-10">
+    G
+  </text>
+  
+  <!-- Punto decorativo (stile G. / IA) -->
+  <circle cx="365" cy="335" r="22" fill="url(#tech-grad)" />
+</svg>
