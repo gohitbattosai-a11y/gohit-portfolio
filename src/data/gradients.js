@@ -73,4 +73,4 @@ export const gradients = {
   }
 };
 
-export const currentTheme = "cyberpunk";
+export const currentTheme = "emerald";
