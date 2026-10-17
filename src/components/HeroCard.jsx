@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { gradients, currentTheme } from "@/data/gradients";
 
@@ -20,7 +21,11 @@ const code = [
   ["br"],
   ["kw", "end"],
   ["br"], ["br"],
-  ["kw", "function "], ["id", "NetworkManager"], ["op", ":"], ["fn", "ValidateRequest"], ["op", "("], ["id", "player"], ["op", ": "], ["type", "Player"], ["op", ", "], ["id", "action"], ["op", ": "], ["type", "string"], ["op", "): "], ["type", "boolean"],
+  ["kw", "function "], ["id", "NetworkManager"], ["op", ":"], ["fn", "ValidateRequest"], ["op", "("],
+  ["br"],
+  ["op", "  "], ["id", "player"], ["op", ": "], ["type", "Player"], ["op", ", "], ["id", "action"], ["op", ": "], ["type", "string"],
+  ["br"],
+  ["op", "): "], ["type", "boolean"],
   ["br"],
   ["op", "  "], ["kw", "local "], ["id", "now "], ["op", "= "], ["fn", "os.clock"], ["op", "()"],
   ["br"],
@@ -47,7 +52,45 @@ const colors = {
   type: "text-emerald-400"
 };
 
+const total = code.reduce((sum, [t, v]) => sum + (t === "br" ? 1 : v.length), 0);
+
+const render = (limit) => {
+  const out = [];
+  let used = 0;
+  for (let i = 0; i < code.length && used < limit; i++) {
+    const [t, v] = code[i];
+    if (t === "br") {
+      out.push(<br key={i} />);
+      used += 1;
+      continue;
+    }
+    const take = Math.min(v.length, limit - used);
+    out.push(<span key={i} className={colors[t]}>{v.slice(0, take)}</span>);
+    used += take;
+  }
+  return out;
+};
+
 export const HeroCard = () => {
+  const [typed, setTyped] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setTyped(total);
+      return undefined;
+    }
+    let raf = 0;
+    let t0 = 0;
+    const tick = (now) => {
+      if (!t0) t0 = now;
+      const n = Math.min(total, Math.floor(Math.max(0, now - t0 - 1100) * 0.26));
+      setTyped(n);
+      if (n < total) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
 
@@ -82,9 +125,10 @@ export const HeroCard = () => {
         </div>
 
         <div className="overflow-x-auto py-2">
-          <pre className="font-mono text-[11px] sm:text-[12px] leading-5 whitespace-pre select-none text-left" style={{ transform: "translateZ(35px)" }}>
-            {code.map(([t, v], i) => t === "br" ? <br key={i} /> : <span key={i} className={colors[t]}>{v}</span>)}
-          </pre>
+          <div className="grid" style={{ transform: "translateZ(35px)" }}>
+            <pre aria-hidden="true" className="invisible font-mono text-[11px] sm:text-[12px] leading-5 whitespace-pre select-none text-left [grid-area:1/1]">{render(total)}</pre>
+            <pre className="font-mono text-[11px] sm:text-[12px] leading-5 whitespace-pre select-none text-left [grid-area:1/1]">{render(typed)}<span className="caret" /></pre>
+          </div>
         </div>
 
         <div className="mt-5 grid grid-cols-3 gap-3 border-t border-white/5 pt-4" style={{ transform: "translateZ(50px)" }}>
