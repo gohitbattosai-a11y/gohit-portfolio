@@ -10,41 +10,35 @@
     --muted: #94a3b8;
 }
 
-/* =========================================================
-   🔥 CRAZY CUSTOM NEON SCROLLBAR
-   ========================================================= */
-/* Larghezza e stile generale della scrollbar */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
 }
 
-/* Sfondo della guida (Track) */
 ::-webkit-scrollbar-track {
-    background: #080c14;
-    border-left: 1px solid rgba(148, 163, 184, 0.08);
+    background: transparent;
 }
 
-/* Cursore scorrevole (Thumb) con sfumatura neon */
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+    background: linear-gradient(180deg, var(--primary), var(--secondary));
     border-radius: 9999px;
-    border: 2px solid #080c14; /* Effetto stacco/fluttuante */
-    transition: all 0.3s ease;
+    box-shadow: 0 0 12px var(--primary);
 }
 
-/* Effetto Hover: Aumento brillantezza e bagliore */
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #55f6ff 0%, #c084fc 100%);
-    box-shadow: 0 0 15px var(--primary);
+    background: linear-gradient(180deg, #fff, var(--primary));
+    box-shadow: 0 0 20px var(--primary);
 }
 
-/* Per Firefox */
+::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
 * {
     scrollbar-width: thin;
-    scrollbar-color: var(--primary) #080c14;
+    scrollbar-color: var(--primary) transparent;
 }
-
-/* ========================================================= */
 
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
