@@ -109,4 +109,4 @@ export const gradients = {
   }
 };
 
-export const currentTheme = "galaxy";
+export const currentTheme = "amber";
