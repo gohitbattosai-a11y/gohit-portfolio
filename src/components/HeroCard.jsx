@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { gradients, currentTheme } from "@/data/gradients";
 
-const theme = gradients[currentTheme];
+const theme = gradients[currentTheme] || gradients.sunset;
 
 const code = [
   ["kw", "type "], ["id", "PlayerData "], ["op", "= { "], ["id", "Coins"], ["op", ": "], ["type", "number"], ["op", ", "], ["id", "Inventory"], ["op", ": { "], ["type", "string"], ["op", " } }"],
@@ -52,20 +52,21 @@ const colors = {
   type: "text-emerald-400"
 };
 
-const total = code.reduce((sum, [t, v]) => sum + (t === "br" ? 1 : v.length), 0);
+const safeCode = Array.isArray(code) ? code : [];
+const total = safeCode.reduce((sum, [t, v]) => sum + (t === "br" ? 1 : (v ? v.length : 0)), 0);
 
 const render = (limit) => {
   const out = [];
   let used = 0;
-  for (let i = 0; i < code.length && used < limit; i++) {
-    const [t, v] = code[i];
+  for (let i = 0; i < safeCode.length && used < limit; i++) {
+    const [t, v] = safeCode[i];
     if (t === "br") {
       out.push(<br key={i} />);
       used += 1;
       continue;
     }
-    const take = Math.min(v.length, limit - used);
-    out.push(<span key={i} className={colors[t]}>{v.slice(0, take)}</span>);
+    const take = Math.min((v || "").length, limit - used);
+    out.push(<span key={i} className={colors[t] || ""}>{(v || "").slice(0, take)}</span>);
     used += take;
   }
   return out;
@@ -115,7 +116,7 @@ export const HeroCard = () => {
     my.set(0); 
   };
 
-  const lineCount = code.filter(([t]) => t === "br").length + 1;
+  const lineCount = safeCode.filter(([t]) => t === "br").length + 1;
 
   return (
     <div onMouseMove={onMove} onMouseLeave={reset} style={{ perspective: 1400 }} className="w-full max-w-2xl mx-auto cursor-default">
@@ -169,7 +170,7 @@ export const HeroCard = () => {
             ["Luau OOP", "Architecture"],
             ["Rate-Limited", "Anti-Exploit"],
             ["Strict Types", "Type-Checking"]
-          ].map(([v, l], index) => (
+          ].map(([v, l]) => (
             <motion.div 
               key={l}
               whileHover={{ scale: 1.03, y: -2 }}
