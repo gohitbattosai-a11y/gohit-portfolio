@@ -68,10 +68,10 @@ const Line = ({ children, delay, className = "" }) => (
 
 const GlassBtn = ({ testid, onClick, children, primary }) => (
   <button data-testid={testid} onClick={onClick}
-    className={`glow-hover group inline-flex items-center justify-center gap-2 rounded-2xl px-7 py-4 min-h-[52px] text-base font-semibold backdrop-blur-xl border w-full sm:w-auto transition-all duration-300 ${
+    className={`glow-hover group inline-flex items-center justify-center gap-2 rounded-2xl flex-1 sm:flex-none px-3.5 sm:px-7 py-4 min-h-[52px] text-sm sm:text-base font-semibold whitespace-nowrap backdrop-blur-xl border transition-all duration-300 ${
       primary ? `bg-[var(--primary)]/15 ${theme.border} text-white hover:bg-[var(--primary)] hover:text-[#080C14] hover:border-[var(--primary)] ${theme.glow}` : "bg-white/[0.04] border-white/15 text-slate-200 hover:bg-white/10"}`}>
     {children}
-    <ArrowDownRight size={18} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+    <ArrowDownRight size={18} className="hidden sm:block transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
   </button>
 );
 
@@ -95,7 +95,7 @@ export const Hero = () => {
 
   return (
     <section id="top" data-testid="hero-section" onPointerMove={onMove} onPointerLeave={onLeave} onPointerCancel={onLeave}
-      className="relative min-h-[100svh] overflow-hidden pt-28 md:pt-36 pb-16">
+      className="relative min-h-[100svh] overflow-hidden pt-24 md:pt-36 pb-12 md:pb-16">
       <div className="absolute inset-0 grid-lines" />
       <motion.div style={{ y: orbY }} className={`pointer-events-none absolute -top-40 -left-32 h-[520px] w-[520px] rounded-full bg-gradient-to-br ${theme.bgOrb1} blur-[120px]`} />
       <motion.div style={{ y: orbY }} className={`pointer-events-none absolute top-40 -right-40 h-[560px] w-[560px] rounded-full bg-gradient-to-br ${theme.bgOrb2} blur-[130px]`} />
@@ -103,16 +103,16 @@ export const Hero = () => {
         style={{ background: `radial-gradient(520px circle at var(--mx, 30%) var(--my, 35%), ${theme.primary}26, transparent 65%)` }} />
       <NetworkField pointer={pointer} />
 
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 grid gap-14 lg:grid-cols-[1.25fr_1fr] lg:items-center">
-        <motion.div style={{ y: titleY }}>
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 grid gap-10 lg:gap-14 lg:grid-cols-[1.25fr_1fr] lg:items-center">
+        <motion.div style={{ y: titleY }} className="min-w-0 lg:min-w-min">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.8 }}
             data-testid="hero-status-badge"
-            className={`inline-flex items-center gap-2.5 rounded-full border px-4 py-2 font-mono text-[11px] uppercase tracking-[0.2em] ${theme.badge}`}>
+            className={`inline-flex items-center gap-2.5 rounded-full border px-4 py-2 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.16em] sm:tracking-[0.2em] ${theme.badge}`}>
             <span className={`pulse-dot h-2 w-2 rounded-full ${theme.dot}`} />
             Open for commissions
           </motion.div>
 
-          <h1 aria-label="Gohit" className="font-display font-black uppercase leading-[0.82] tracking-tight mt-8">
+          <h1 aria-label="Gohit" className="font-display font-black uppercase leading-[0.82] tracking-tight mt-6 sm:mt-8">
             <Line delay={0.25} className="text-[30vw] sm:text-[11rem] lg:text-[13rem]"><Scramble text="Gohit" delay={250} /></Line>
           </h1>
           <h2 className="font-display uppercase font-bold leading-[0.95] text-3xl sm:text-5xl lg:text-[3.4rem] mt-2 text-slate-100">
@@ -126,9 +126,9 @@ export const Hero = () => {
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1, duration: 0.9, ease }}
-            className="mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">
+            className="mt-8 sm:mt-10 flex flex-row gap-2.5 sm:gap-4">
             <GlassBtn testid="hero-showcase-button" primary onClick={() => scrollToId("showcase")}>
-              <Sparkles size={18} /> My Showcase
+              <Sparkles size={18} className="hidden sm:block" /> My Showcase
             </GlassBtn>
             <GlassBtn testid="hero-commission-button" onClick={() => scrollToId("contact")}>Commission Me</GlassBtn>
           </motion.div>
