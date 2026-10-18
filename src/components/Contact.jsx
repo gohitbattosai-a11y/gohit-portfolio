@@ -24,7 +24,7 @@ const copy = async () => {
 };
 
 export const Contact = () => (
-  <section id="contact" data-testid="contact-section" className="relative py-28 md:py-40 overflow-hidden">
+  <section id="contact" data-testid="contact-section" className="relative py-20 md:py-40 overflow-hidden">
     <div className={`pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r ${theme.bgOrb1} ${theme.bgOrb2} blur-[120px]`} />
     <div className="relative mx-auto max-w-5xl px-5 sm:px-6 lg:px-8 text-center">
       <Reveal>
