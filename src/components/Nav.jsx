@@ -41,8 +41,8 @@ export const Nav = () => {
         </div>
         <div className="flex items-center gap-2">
           <button data-testid="nav-discord-contact-button" onClick={() => go("contact")}
-            className={`glow-hover rounded-xl border ${theme.border} bg-[var(--primary)]/10 px-4 py-2.5 text-sm font-semibold text-white hover:bg-[var(--primary)] hover:text-[#080C14] hover:border-[var(--primary)] transition-all duration-300 min-h-[44px]`}>
-            Discord / Contact
+            className={`glow-hover rounded-xl border ${theme.border} bg-[var(--primary)]/10 px-4 py-2.5 text-sm font-semibold whitespace-nowrap text-white hover:bg-[var(--primary)] hover:text-[#080C14] hover:border-[var(--primary)] transition-all duration-300 min-h-[44px]`}>
+            <span className="sm:hidden">Contact</span><span className="hidden sm:inline">Discord / Contact</span>
           </button>
           <button data-testid="nav-mobile-menu-toggle" aria-label="Menu" onClick={() => setOpen(!open)}
             className="md:hidden h-11 w-11 grid place-items-center rounded-xl border border-white/10">
