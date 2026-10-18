@@ -71,42 +71,42 @@ export const gradients = {
     badge: "border-indigo-400/25 bg-indigo-400/5 text-indigo-200",
     dot: "bg-indigo-400"
   },
-  neon: {
-    name: "Neon",
-    primary: "#00ff87",
-    secondary: "#60efff",
-    bgOrb1: "from-emerald-500/20",
-    bgOrb2: "from-cyan-500/25",
-    textGradient: "from-emerald-300 to-cyan-300",
-    border: "border-emerald-300/50",
-    glow: "shadow-[0_0_40px_-12px_rgba(0,255,135,0.7)]",
-    badge: "border-emerald-400/25 bg-emerald-400/5 text-emerald-200",
-    dot: "bg-emerald-400"
+  amber: {
+    name: "Ambra",
+    primary: "#f7971e",
+    secondary: "#ffd200",
+    bgOrb1: "from-amber-500/20",
+    bgOrb2: "from-yellow-500/25",
+    textGradient: "from-amber-300 to-yellow-200",
+    border: "border-amber-300/50",
+    glow: "shadow-[0_0_40px_-12px_rgba(247,151,30,0.7)]",
+    badge: "border-amber-400/25 bg-amber-400/5 text-amber-200",
+    dot: "bg-amber-400"
   },
-  amethyst: {
-    name: "Ametista",
-    primary: "#9d4edd",
-    secondary: "#c77dff",
-    bgOrb1: "from-purple-500/20",
-    bgOrb2: "from-violet-500/25",
-    textGradient: "from-purple-300 to-violet-300",
+  mint: {
+    name: "Menta",
+    primary: "#00b09b",
+    secondary: "#96c93d",
+    bgOrb1: "from-teal-500/20",
+    bgOrb2: "from-lime-500/25",
+    textGradient: "from-teal-300 to-lime-300",
+    border: "border-teal-300/50",
+    glow: "shadow-[0_0_40px_-12px_rgba(0,176,155,0.7)]",
+    badge: "border-teal-400/25 bg-teal-400/5 text-teal-200",
+    dot: "bg-teal-400"
+  },
+  galaxy: {
+    name: "Galassia",
+    primary: "#8A2387",
+    secondary: "#F27121",
+    bgOrb1: "from-purple-600/20",
+    bgOrb2: "from-rose-600/25",
+    textGradient: "from-purple-300 to-rose-300",
     border: "border-purple-300/50",
-    glow: "shadow-[0_0_40px_-12px_rgba(157,78,221,0.7)]",
+    glow: "shadow-[0_0_40px_-12px_rgba(138,35,135,0.7)]",
     badge: "border-purple-400/25 bg-purple-400/5 text-purple-200",
     dot: "bg-purple-400"
-  },
-  aurora: {
-    name: "Aurora",
-    primary: "#00b4d8",
-    secondary: "#90e0ef",
-    bgOrb1: "from-sky-500/20",
-    bgOrb2: "from-teal-500/25",
-    textGradient: "from-sky-300 to-teal-300",
-    border: "border-sky-300/50",
-    glow: "shadow-[0_0_40px_-12px_rgba(0,180,216,0.7)]",
-    badge: "border-sky-400/25 bg-sky-400/5 text-sky-200",
-    dot: "bg-sky-400"
   }
 };
 
-export const currentTheme = "aurora";
+export const currentTheme = "galaxy";
