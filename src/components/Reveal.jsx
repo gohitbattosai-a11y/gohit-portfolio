@@ -13,7 +13,7 @@ export const Reveal = ({ children, delay = 0, className = "", y = 40 }) => (
 );
 
 export const SectionHead = ({ index, eyebrow, title, children }) => (
-  <Reveal className="mb-12 md:mb-16 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
+  <Reveal className="mb-8 md:mb-16 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
     <div>
       <p className="eyebrow mb-4">
         <span className="text-slate-400">{index} /</span> {eyebrow}
