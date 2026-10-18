@@ -13,9 +13,9 @@ const items = [
 const Row = ({ hidden }) => (
   <div className="flex shrink-0 items-center" aria-hidden={hidden}>
     {items.map((t) => (
-      <span key={t} className="flex items-center font-display uppercase font-extrabold text-4xl md:text-6xl tracking-tight px-6 md:px-10 whitespace-nowrap">
+      <span key={t} className="flex items-center font-display uppercase font-extrabold text-3xl md:text-6xl tracking-tight px-6 md:px-10 whitespace-nowrap">
         <span className="text-slate-200">{t}</span>
-        <span className={`ml-12 md:ml-20 h-3 w-3 rotate-45 bg-gradient-to-br ${theme.textGradient}`} />
+        <span className={`ml-10 md:ml-20 h-3 w-3 rotate-45 bg-gradient-to-br ${theme.textGradient}`} />
       </span>
     ))}
   </div>
