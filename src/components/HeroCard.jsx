@@ -113,7 +113,7 @@ export const HeroCard = () => {
       <motion.div
         data-testid="hero-3d-card"
         style={{ rotateX: rx, rotateY: ry, transformStyle: "preserve-3d" }}
-        className={`glass relative rounded-2xl p-5 sm:p-6 ${theme.glow} border border-white/10 bg-slate-950/90 backdrop-blur-md`}
+        className={`glass relative rounded-2xl p-4 sm:p-6 ${theme.glow} border border-white/10 bg-slate-950/90 backdrop-blur-md`}
       >
         <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-3" style={{ transform: "translateZ(20px)" }}>
           <div className="flex gap-2">
@@ -121,13 +121,13 @@ export const HeroCard = () => {
             <span className="h-3 w-3 rounded-full bg-yellow-500/80" />
             <span className="h-3 w-3 rounded-full bg-green-500/80" />
           </div>
-          <span className="font-mono text-xs text-slate-400">ServerScriptService / NetworkManager.luau</span>
+          <span className="min-w-0 truncate pl-3 font-mono text-[10px] sm:text-xs text-slate-400">ServerScriptService / NetworkManager.luau</span>
         </div>
 
         <div className="overflow-x-auto py-2">
           <div className="grid" style={{ transform: "translateZ(35px)" }}>
-            <pre aria-hidden="true" className="invisible font-mono text-[11px] sm:text-[12px] leading-5 whitespace-pre select-none text-left [grid-area:1/1]">{render(total)}</pre>
-            <pre className="font-mono text-[11px] sm:text-[12px] leading-5 whitespace-pre select-none text-left [grid-area:1/1]">{render(typed)}<span className="caret" /></pre>
+            <pre aria-hidden="true" className="invisible font-mono text-[10px] sm:text-[12px] leading-5 whitespace-pre select-none text-left [grid-area:1/1]">{render(total)}</pre>
+            <pre className="font-mono text-[10px] sm:text-[12px] leading-5 whitespace-pre select-none text-left [grid-area:1/1]">{render(typed)}<span className="caret" /></pre>
           </div>
         </div>
 
