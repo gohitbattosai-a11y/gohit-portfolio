@@ -11,33 +11,13 @@
 }
 
 ::-webkit-scrollbar {
-    width: 6px;
+    display: none !important;
+    width: 0 !important;
 }
 
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--primary), var(--secondary));
-    border-radius: 9999px;
-    box-shadow: 0 0 12px var(--primary);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #fff, var(--primary));
-    box-shadow: 0 0 20px var(--primary);
-}
-
-::-webkit-scrollbar-button {
-    display: none;
-    width: 0;
-    height: 0;
-}
-
-* {
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary) transparent;
+html, body {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
 }
 
 html.lenis, html.lenis body { height: auto; }
