@@ -35,10 +35,10 @@ export const Nav = () => {
           <Logo className="h-8 w-8" />
           <div className="flex flex-col items-start leading-none">
             <span className="font-display text-xl font-extrabold uppercase tracking-wide">
-              IlTuoNome
+              GOHIT
             </span>
             <span className="text-[10px] text-slate-400 font-mono">
-              Created by IlTuoNome
+              Made by GOHIT
             </span>
           </div>
         </button>
