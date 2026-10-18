@@ -70,7 +70,43 @@ export const gradients = {
     glow: "shadow-[0_0_40px_-12px_rgba(76,161,175,0.7)]",
     badge: "border-indigo-400/25 bg-indigo-400/5 text-indigo-200",
     dot: "bg-indigo-400"
+  },
+  neon: {
+    name: "Neon",
+    primary: "#00ff87",
+    secondary: "#60efff",
+    bgOrb1: "from-emerald-500/20",
+    bgOrb2: "from-cyan-500/25",
+    textGradient: "from-emerald-300 to-cyan-300",
+    border: "border-emerald-300/50",
+    glow: "shadow-[0_0_40px_-12px_rgba(0,255,135,0.7)]",
+    badge: "border-emerald-400/25 bg-emerald-400/5 text-emerald-200",
+    dot: "bg-emerald-400"
+  },
+  amethyst: {
+    name: "Ametista",
+    primary: "#9d4edd",
+    secondary: "#c77dff",
+    bgOrb1: "from-purple-500/20",
+    bgOrb2: "from-violet-500/25",
+    textGradient: "from-purple-300 to-violet-300",
+    border: "border-purple-300/50",
+    glow: "shadow-[0_0_40px_-12px_rgba(157,78,221,0.7)]",
+    badge: "border-purple-400/25 bg-purple-400/5 text-purple-200",
+    dot: "bg-purple-400"
+  },
+  aurora: {
+    name: "Aurora",
+    primary: "#00b4d8",
+    secondary: "#90e0ef",
+    bgOrb1: "from-sky-500/20",
+    bgOrb2: "from-teal-500/25",
+    textGradient: "from-sky-300 to-teal-300",
+    border: "border-sky-300/50",
+    glow: "shadow-[0_0_40px_-12px_rgba(0,180,216,0.7)]",
+    badge: "border-sky-400/25 bg-sky-400/5 text-sky-200",
+    dot: "bg-sky-400"
   }
 };
 
-export const currentTheme = "midnight";
+export const currentTheme = "aurora";
