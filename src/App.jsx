@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Toaster } from "sonner";
+import { Analytics } from "@vercel/analytics/react";
 import { initLenis, lockScroll } from "@/lib/scroll";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
@@ -76,6 +77,7 @@ function App() {
       <Footer />
       <Toaster theme="dark" position="bottom-center" richColors />
       {phase !== "done" && <Intro onReveal={reveal} onDone={() => setPhase("done")} />}
+      <Analytics />
     </div>
   );
 }
