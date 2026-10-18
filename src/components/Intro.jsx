@@ -97,11 +97,11 @@ export const Intro = ({ onReveal, onDone }) => {
         transition={split}
         className="absolute inset-x-0 bottom-0 flex h-1/2 items-start justify-between bg-[#080C14] px-[6vw] pt-3"
       >
-        <span className="font-display font-black leading-[0.8] tabular-nums" style={{ fontSize: "min(34vw, 38vh)" }}>
+        <span className="font-display font-black leading-[0.8] tabular-nums" style={{ fontSize: "min(46vw, 38vh)" }}>
           <span className="text-white/10">{pad}</span>
           <span className={`bg-gradient-to-r ${theme.textGradient} bg-clip-text text-transparent`}>{digits}</span>
         </span>
-        <span className="hidden pt-1 font-mono text-[11px] text-slate-500 sm:block">Press any key to skip</span>
+        <span className="pt-1 font-mono text-[11px] text-slate-500"><span className="sm:hidden">Tap to skip</span><span className="hidden sm:inline">Press any key to skip</span></span>
       </motion.div>
 
       <motion.div
