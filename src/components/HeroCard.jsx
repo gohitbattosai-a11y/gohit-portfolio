@@ -13,33 +13,33 @@ const code = [
   ["br"], ["br"],
   ["kw", "function "], ["id", "NetworkManager"], ["op", "."], ["fn", "new"], ["op", "(): "], ["id", "NetworkManager"],
   ["br"],
-  ["op", "  "], ["kw", "local "], ["id", "self "], ["op", "= "], ["fn", "setmetatable"], ["op", "({}, "], ["id", "NetworkManager"], ["op", ")"],
+  ["op", "   "], ["kw", "local "], ["id", "self "], ["op", "= "], ["fn", "setmetatable"], ["op", "({}, "], ["id", "NetworkManager"], ["op", ")"],
   ["br"],
-  ["op", "  "], ["id", "self"], ["op", "."], ["id", "_rateLimits "], ["op", "= {}"],
+  ["op", "   "], ["id", "self"], ["op", "."], ["id", "_rateLimits "], ["op", "= {}"],
   ["br"],
-  ["op", "  "], ["kw", "return "], ["id", "self"],
+  ["op", "   "], ["kw", "return "], ["id", "self"],
   ["br"],
   ["kw", "end"],
   ["br"], ["br"],
   ["kw", "function "], ["id", "NetworkManager"], ["op", ":"], ["fn", "ValidateRequest"], ["op", "("],
   ["br"],
-  ["op", "  "], ["id", "player"], ["op", ": "], ["type", "Player"], ["op", ", "], ["id", "action"], ["op", ": "], ["type", "string"],
+  ["op", "   "], ["id", "player"], ["op", ": "], ["type", "Player"], ["op", ", "], ["id", "action"], ["op", ": "], ["type", "string"],
   ["br"],
   ["op", "): "], ["type", "boolean"],
   ["br"],
-  ["op", "  "], ["kw", "local "], ["id", "now "], ["op", "= "], ["fn", "os.clock"], ["op", "()"],
+  ["op", "   "], ["kw", "local "], ["id", "now "], ["op", "= "], ["fn", "os.clock"], ["op", "()"],
   ["br"],
-  ["op", "  "], ["kw", "local "], ["id", "lastCall "], ["op", "= "], ["id", "self"], ["op", "."], ["id", "_rateLimits"], ["op", "["], ["id", "player.UserId"], ["op", "] "], ["kw", "or "], ["op", "0"],
+  ["op", "   "], ["kw", "local "], ["id", "lastCall "], ["op", "= "], ["id", "self"], ["op", "."], ["id", "_rateLimits"], ["op", "["], ["id", "player.UserId"], ["op", "] "], ["kw", "or "], ["op", "0"],
   ["br"],
-  ["op", "  "], ["kw", "if "], ["id", "now "], ["op", "- "], ["id", "lastCall "], ["op", "< "], ["op", "0.1 "], ["kw", "then"],
+  ["op", "   "], ["if "], ["id", "now "], ["op", "- "], ["id", "lastCall "], ["op", "< "], ["op", "0.1 "], ["kw", "then"],
   ["br"],
-  ["op", "    "], ["kw", "return "], ["kw", "false"], ["op", " -- Anti-Spam Triggered"],
+  ["op", "      "], ["kw", "return "], ["kw", "false"],
   ["br"],
-  ["op", "  "], ["kw", "end"],
+  ["op", "   "], ["kw", "end"],
   ["br"],
-  ["op", "  "], ["id", "self"], ["op", "."], ["id", "_rateLimits"], ["op", "["], ["id", "player.UserId"], ["op", "] = "], ["id", "now"],
+  ["op", "   "], ["id", "self"], ["op", "."], ["id", "_rateLimits"], ["op", "["], ["id", "player.UserId"], ["op", "] = "], ["id", "now"],
   ["br"],
-  ["op", "  "], ["kw", "return "], ["kw", "true"],
+  ["op", "   "], ["kw", "return "], ["kw", "true"],
   ["br"],
   ["kw", "end"],
 ];
@@ -83,7 +83,7 @@ export const HeroCard = () => {
     let t0 = 0;
     const tick = (now) => {
       if (!t0) t0 = now;
-      const n = Math.min(total, Math.floor(Math.max(0, now - t0 - 1100) * 0.26));
+      const n = Math.min(total, Math.floor(Math.max(0, now - t0 - 1100) * 0.35));
       setTyped(n);
       if (n < total) raf = requestAnimationFrame(tick);
     };
@@ -94,13 +94,20 @@ export const HeroCard = () => {
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
 
-  const rx = useSpring(useTransform(my, [-0.5, 0.5], [8, -8]), { stiffness: 120, damping: 14 });
-  const ry = useSpring(useTransform(mx, [-0.5, 0.5], [-10, 10]), { stiffness: 120, damping: 14 });
+  const rx = useSpring(useTransform(my, [-0.5, 0.5], [10, -10]), { stiffness: 150, damping: 15 });
+  const ry = useSpring(useTransform(mx, [-0.5, 0.5], [-12, 12]), { stiffness: 150, damping: 15 });
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
   const onMove = (e) => {
     const r = e.currentTarget.getBoundingClientRect();
-    mx.set((e.clientX - r.left) / r.width - 0.5);
-    my.set((e.clientY - r.top) / r.height - 0.5);
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    mx.set(x / r.width - 0.5);
+    my.set(y / r.height - 0.5);
+    mouseX.set(x);
+    mouseY.set(y);
   };
 
   const reset = () => { 
@@ -108,45 +115,76 @@ export const HeroCard = () => {
     my.set(0); 
   };
 
+  const lineCount = code.filter(([t]) => t === "br").length + 1;
+
   return (
-    <div onMouseMove={onMove} onMouseLeave={reset} style={{ perspective: 1200 }} className="w-full max-w-2xl mx-auto">
+    <div onMouseMove={onMove} onMouseLeave={reset} style={{ perspective: 1400 }} className="w-full max-w-2xl mx-auto cursor-default">
       <motion.div
         data-testid="hero-3d-card"
         style={{ rotateX: rx, rotateY: ry, transformStyle: "preserve-3d" }}
-        className={`glass relative rounded-2xl p-4 sm:p-6 ${theme.glow} border border-white/10 bg-slate-950/90 backdrop-blur-md`}
+        className={`glass relative rounded-2xl p-4 sm:p-6 ${theme.glow} border border-white/15 bg-slate-950/95 backdrop-blur-xl shadow-2xl overflow-hidden`}
       >
-        <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-3" style={{ transform: "translateZ(20px)" }}>
-          <div className="flex gap-2">
-            <span className="h-3 w-3 rounded-full bg-red-500/80" />
-            <span className="h-3 w-3 rounded-full bg-yellow-500/80" />
-            <span className="h-3 w-3 rounded-full bg-green-500/80" />
+        <motion.div
+          className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          style={{
+            background: useTransform(
+              [mouseX, mouseY],
+              ([x, y]) => `radial-gradient(400px circle at ${x}px ${y}px, rgba(255,255,255,0.08), transparent 80%)`
+            ),
+          }}
+        />
+
+        <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-3 relative z-10" style={{ transform: "translateZ(25px)" }}>
+          <div className="flex items-center gap-3">
+            <div className="flex gap-2">
+              <span className="h-3 w-3 rounded-full bg-red-500/90 shadow-sm shadow-red-500/50" />
+              <span className="h-3 w-3 rounded-full bg-yellow-500/90 shadow-sm shadow-yellow-500/50" />
+              <span className="h-3 w-3 rounded-full bg-green-500/90 shadow-sm shadow-green-500/50" />
+            </div>
+            <div className="h-4 w-[1px] bg-white/10" />
+            <span className="min-w-0 truncate font-mono text-[11px] sm:text-xs text-slate-300 font-medium">ServerScriptService / NetworkManager.luau</span>
           </div>
-          <span className="min-w-0 truncate pl-3 font-mono text-[10px] sm:text-xs text-slate-400">ServerScriptService / NetworkManager.luau</span>
+
+          <div className={`hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full border ${theme.badge} text-[10px] font-mono`}>
+            <span className={`h-1.5 w-1.5 rounded-full ${theme.dot} animate-pulse`} />
+            LIVE SECURE
+          </div>
         </div>
 
-        <div className="overflow-x-auto py-2">
-          <div className="grid" style={{ transform: "translateZ(35px)" }}>
+        <div className="overflow-x-auto py-2 relative z-10 flex gap-4">
+          <div className="select-none font-mono text-[10px] sm:text-[12px] leading-5 text-slate-600 text-right pr-2 border-r border-white/5 flex flex-col">
+            {Array.from({ length: lineCount }).map((_, i) => (
+              <span key={i}>{i + 1}</span>
+            ))}
+          </div>
+
+          <div className="grid flex-1" style={{ transform: "translateZ(40px)" }}>
             <pre aria-hidden="true" className="invisible font-mono text-[10px] sm:text-[12px] leading-5 whitespace-pre select-none text-left [grid-area:1/1]">{render(total)}</pre>
-            <pre className="font-mono text-[10px] sm:text-[12px] leading-5 whitespace-pre select-none text-left [grid-area:1/1]">{render(typed)}<span className="caret" /></pre>
+            <pre className="font-mono text-[10px] sm:text-[12px] leading-5 whitespace-pre select-none text-left [grid-area:1/1]">{render(typed)}<span className="inline-block w-2 h-4 bg-white/80 animate-pulse ml-0.5 align-middle" /></pre>
           </div>
         </div>
 
-        <div className="mt-5 grid grid-cols-3 gap-3 border-t border-white/5 pt-4" style={{ transform: "translateZ(50px)" }}>
+        <div className="mt-5 grid grid-cols-3 gap-3 border-t border-white/10 pt-4 relative z-10" style={{ transform: "translateZ(60px)" }}>
           {[
             ["Luau OOP", "Architecture"],
             ["Rate-Limited", "Anti-Exploit"],
             ["Strict Types", "Type-Checking"]
-          ].map(([v, l]) => (
-            <div key={l} className="rounded-lg border border-white/5 bg-white/[0.02] p-2.5 text-center">
+          ].map(([v, l], index) => (
+            <motion.div 
+              key={l}
+              whileHover={{ scale: 1.03, y: -2 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="rounded-xl border border-white/10 bg-white/[0.03] p-3 text-center shadow-lg backdrop-blur-md"
+            >
               <p className={`font-display text-sm sm:text-base font-bold text-transparent bg-clip-text bg-gradient-to-r ${theme.textGradient}`}>
                 {v}
               </p>
-              <p className="font-mono text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wider mt-0.5">{l}</p>
-            </div>
+              <p className="font-mono text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wider mt-1">{l}</p>
+            </motion.div>
           ))}
         </div>
 
-        <div className={`pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br ${theme.bgOrb1} via-transparent ${theme.bgOrb2} opacity-50 -z-10 blur-xl`} />
+        <div className={`pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br ${theme.bgOrb1} via-transparent ${theme.bgOrb2} opacity-60 -z-10 blur-2xl`} />
       </motion.div>
     </div>
   );
