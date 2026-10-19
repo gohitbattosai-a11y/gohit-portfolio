@@ -36,22 +36,6 @@ const ScrollProgress = ({ from, to }) => {
   );
 };
 
-const CustomScrollBar = () => {
-  const { scrollYProgress } = useScroll();
-  const scaleY = useSpring(scrollYProgress, { stiffness: 140, damping: 28, mass: 0.3 });
-
-  return (
-    <div className="fixed right-1.5 top-3 bottom-3 z-[60] pointer-events-none flex items-center">
-      <div className="w-[3px] h-full bg-white/5 rounded-full overflow-hidden">
-        <motion.div
-          style={{ scaleY, originY: 0 }}
-          className="w-full h-full bg-gradient-to-b from-[var(--primary)] to-[var(--secondary)] shadow-[0_0_10px_var(--primary)] rounded-full"
-        />
-      </div>
-    </div>
-  );
-};
-
 function App() {
   const [phase, setPhase] = useState(() => (shouldPlayIntro() ? "intro" : "done"));
 
@@ -82,7 +66,6 @@ function App() {
     <div className="relative min-h-screen bg-[#080C14] text-slate-50">
       <div className="grain" />
       <ScrollProgress from={t.secondary} to={t.primary} />
-      <CustomScrollBar />
       {live && <Nav />}
       <main>
         {live && <Hero />}
